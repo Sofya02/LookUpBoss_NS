@@ -42,5 +42,5 @@ int GettingIdFromTxtFile(const char* file_txt);
 /*Работа с xml файлом*/
 bool WorkingWithXMLFile(const char* file_xml);
 
-
+/*Прооверка на существование файла*/
 int exists(const char* fname);
