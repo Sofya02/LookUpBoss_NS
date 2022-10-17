@@ -227,23 +227,6 @@ int main(int argc, char* argv[])
 
     WorkingWithXMLFile(xml_file);
 
-    /*string result;
-    string exp = "";
-    
-    for (int i = -10; i < 50; i++)
-    {
-        result = MatchingIdAndName(i);
-        if ((i < 1) || (i > 31)) { 
-            bool b = result == exp;
-            cout<<i<<" " << b << endl; }
-        else
-        {
-            bool b = result != exp;
-            cout << i<<" " << b << endl;
-        }
-        }*/
-    
-
     return 0;
 }
 
