@@ -18,13 +18,13 @@ struct Person {
 /*!Функция сопоставления id и ФИО
 *
 * \param[in] id-сотрудника(текущее)
-* return значение ФИО соответствующее его id
+* \return значение ФИО соответствующее его id
 */
 string MatchingIdAndName(int id_for_name);
 
 
 /*!Сохранение результатов в файл
-* \return true
+*  return true
 */
 bool SavingResultsToAFile();
 
@@ -38,7 +38,7 @@ void SearchSuperiorsOfTheDesiredEmployee(XMLElement* node, int findid);
 /*!Проверка данных из txt - файла
 * 
 * \param[in] s - строка из txt-файла
-* \return true
+* return true
 */
 bool isdigit(string s);
 

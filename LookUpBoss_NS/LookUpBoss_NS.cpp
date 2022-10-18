@@ -10,15 +10,15 @@ vector <bool> habsent;
 vector <Person> person;
 
 
-//Функция сопоставления id и ФИО
+///Функция сопоставления id и ФИО
 string MatchingIdAndName(int id_for_name)
 {
     for (int i = 0; i < person.size(); i++)
     {
-        //Если текущее id соответсвует id_имени человека
+        /// Если текущее id соответсвует id_имени человека
         if (person[i].id == id_for_name)
         {
-            //возвращаем значение его ФИО
+            /// возвращаем значение его ФИО
             return person[i].Name;
         }
     }
@@ -28,28 +28,28 @@ string MatchingIdAndName(int id_for_name)
 }
 
 
-//Функция сохранения результатов в файл
+///Функция сохранения результатов в файл
 bool SavingResultsToAFile()
 {
-    ofstream fout; // объект класса ofstream
+    ofstream fout; /// объект класса ofstream
     fout.open("output.txt", std::ios::app);
     for (int i = headers.size() - 2; i >= 0; i--)
     {
-        //Если сотрудник присутствует на рабочем месте, записываем его в выходной файл
+        /// Если сотрудник присутствует на рабочем месте, записываем его в выходной файл
         if (habsent[i])
         {
-            //Записываем сотрудника в выходной файл
+            /// Записываем сотрудника в выходной файл
             fout << MatchingIdAndName(headers[i]) << endl;
             return true;
         }
         else { return false; }
     }
-    //Закрытие файла
+    /// Закрытие файла
     fout.close();
 
 }
 
-//Функция прооверки на существование файла
+///Функция прооверки на существование файла
 int exists(const char* fname)
 {
     FILE* file;
@@ -61,79 +61,79 @@ int exists(const char* fname)
     return 0;
 }
 
-//Функция поиска начальников искомого сотрудника
+///Функция поиска начальников искомого сотрудника
 void SearchSuperiorsOfTheDesiredEmployee(XMLElement* node, int findid)
 {
-    //Перебираем все элементы с именем Department
+    /// Перебираем все элементы с именем Department
     while (node != NULL)
     {
-        string element = string((char*)node->Value());//преобразование char в string?????????????
-        //Если название элемента есть "Department"
+        string element = string((char*)node->Value());///< Преобразование значения элемента из char в string
+        /// Если название элемента есть "Department"
         if (element == "Department")
         {
             int id = 0;
-            node->QueryIntAttribute("head", &id);//Получение значения "head" у "Department"(начальник отдела)
-            headers.push_back(id);//добавление id
-            habsent.push_back(true);//подтверждение добавления
+            node->QueryIntAttribute("head", &id);/// Получение значения "head" у "Department"(начальник отдела)
+            headers.push_back(id);/// добавление id
+            habsent.push_back(true);/// подтверждение добавления
         }
-        //Если название элемента есть "Person"
+        /// Если название элемента есть "Person"
         if (element == "Person")
         {
             int id = 0;
             int absent = 0;
             int findAbsent = 1;
             Person p;
-            node->QueryIntAttribute("id", &id);//получение значения "id"
-            p.Name = node->GetText();//присвоение значений
+            node->QueryIntAttribute("id", &id);/// получение значения "id"
+            p.Name = node->GetText();/// присвоение значений
             p.id = id;
-            person.push_back(p);//добавление сотрудника
-            node->QueryIntAttribute("absent", &absent);//получение значение "absent"
-            //Если текущего сотрудника нет на рабочем месте, переход к следующему сотруднику
+            person.push_back(p);/// добавление сотрудника
+            node->QueryIntAttribute("absent", &absent);/// получение значение "absent"
+            /// Если текущего сотрудника нет на рабочем месте, переход к следующему сотруднику
             if (findAbsent == absent)
             {
                 int i = 0;
                 while (i < headers.size())
                 {
-                    //Если соответсвие id произошло
+                    /// Если соответсвие id произошло
                     if (headers[i] == id)
                     {
-                        //присвоение значения false 
+                        /// присвоение значения false 
                         habsent[i] = false;
                     }
-                    //Игнорирование данного сотрудника и переход к следующему
+                    /// Игнорирование данного сотрудника и переход к следующему
                     i++;
                 }
             }
-            //Если соответсвие id из txt-файла найдено
+            /// Если соответсвие id из txt-файла найдено
             if (findid == id)
             {
-                //Если сотрудник отсутствует
+                /// Если сотрудник отсутствует
                 if (findAbsent == absent)
                 {
-                    //Вывод сообщения об ошибке
+                    /// Вывод сообщения об ошибке
                     cout << "The person is absent" << endl;
                     
                 }
-                //Иначе
+                /// Иначе
                 else
                 {
-                    //Если id=1, следовательно-это глава фирмы, 
+                    /// Если id=1, следовательно-это глава фирмы, 
                     if (id == 1) { cout << "No solution"; }
-                    SavingResultsToAFile();//Сохранение результатов в файл
+                    SavingResultsToAFile();/// Сохранение результатов в файл
                 }
             }
         }
-        //Рекурсивный вызов: для поиска искомого сотрудника в дочерних элементах
+        /// Рекурсивный вызов: для поиска искомого сотрудника в дочерних элементах
         SearchSuperiorsOfTheDesiredEmployee(node->FirstChildElement(), findid);
         if (element == "Department") {
-            headers.pop_back();//удаление
+            headers.pop_back();/// удаление
             habsent.pop_back();
         }
-        node = node->NextSiblingElement();//Переход к следующему элементу
+        node = node->NextSiblingElement();/// Переход к следующему элементу
     }
 }
 
-//Функция проверки данных из txt-файла
+///Функция проверки данных из txt-файла
 bool isdigit(string s)
 {
     for (int i = 0; i < s.length(); i++)
@@ -147,24 +147,24 @@ bool isdigit(string s)
 
 }
 
-//Функция получения id из txt-файла
+///Функция получения id из txt-файла
 int GettingIdFromTxtFile(const char* file_txt)
 {
     string id_txt;
-    //Получение значения id из txt - файла
+    /// Получение значения id из txt - файла
     fstream file;
-    //открываем файл в режиме чтения
+    /// открываем файл в режиме чтения
     file.open(file_txt);
-    //если открытие файла прошло корректно, то
+    /// если открытие файла прошло корректно, то
     try
     {
         if (file)
         {
-            //цикл для чтения значений из файла; выполнение цикла прервется,
-               // когда достигнем конца файла, в этом случае F.eof() вернет истину.
+            /// цикл для чтения значений из файла; выполнение цикла прервется,
+               /// когда достигнем конца файла, в этом случае F.eof() вернет истину.
             while (!file.eof())
             {
-                //чтение очередного значения из потока F в переменную a
+                /// чтение очередного значения из потока F в переменную a
                 file >> id_txt;
                 if (isdigit(id_txt))
                 {
@@ -173,7 +173,7 @@ int GettingIdFromTxtFile(const char* file_txt)
                 else
                     throw 2;
             }
-            //закрытие файла
+            /// закрытие файла
             file.close();
         }
         else
@@ -190,7 +190,7 @@ int GettingIdFromTxtFile(const char* file_txt)
 }
 
 
-//Функция работы с xml файлом
+///Функция работы с xml файлом
 bool WorkingWithXMLFile(const char* file_xml)
 {
     XMLDocument doc;
