@@ -21,26 +21,43 @@ struct Person {
 * return значение ФИО соответствующее его id
 */
 string MatchingIdAndName(int id_for_name);
-//Сохранение результатов в файл
+
+
+/*!Сохранение результатов в файл
+* \return true
+*/
 bool SavingResultsToAFile();
 
-/*!
-* \Функция поиска начальников искомого сотрудника*****
+/*!Функция поиска начальников искомого сотрудника*****
 *
 * \param [in] node - указатель на элемент в XML-файле
 * \param [in] findid - id сотрудника
 */
 void SearchSuperiorsOfTheDesiredEmployee(XMLElement* node, int findid);
 
-//проверка данных из txt-файла
+/*!Проверка данных из txt - файла
+* 
+* \param[in] s - строка из txt-файла
+* \return true
+*/
 bool isdigit(string s);
 
-/*Получение id из txt-файла*/
+/*Получение id из txt-файла
+* 
+* \param[in] file_txt -имя файла
+* return id - идентификационный номер сотрудника
+*/
 int GettingIdFromTxtFile(const char* file_txt);
 
 
-/*Работа с xml файлом*/
+/*!Работа с xml файлом
+* 
+* \param[in] file_xml -имя файла
+* return true
+*/
 bool WorkingWithXMLFile(const char* file_xml);
 
-/*Прооверка на существование файла*/
+/*!Прооверка на существование файла(для модульных тестов)
+* \param[in] fname -имя файла
+*/
 int exists(const char* fname);

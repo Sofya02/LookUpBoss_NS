@@ -10,11 +10,7 @@ vector <bool> habsent;
 vector <Person> person;
 
 
-/*!Функция сопоставления id и ФИО
-*
-* \param[in] id-сотрудника(текущее)
-* return значение ФИО соответствующее его id
-*/
+//Функция сопоставления id и ФИО
 string MatchingIdAndName(int id_for_name)
 {
     for (int i = 0; i < person.size(); i++)
@@ -32,7 +28,7 @@ string MatchingIdAndName(int id_for_name)
 }
 
 
-//Сохранение результатов в файл
+//Функция сохранения результатов в файл
 bool SavingResultsToAFile()
 {
     ofstream fout; // объект класса ofstream
@@ -53,7 +49,7 @@ bool SavingResultsToAFile()
 
 }
 
-/*Прооверка на существование файла*/
+//Функция прооверки на существование файла
 int exists(const char* fname)
 {
     FILE* file;
@@ -65,12 +61,7 @@ int exists(const char* fname)
     return 0;
 }
 
-/*!
-* \Функция поиска начальников искомого сотрудника*****
-*
-* \param [in] node - указатель на элемент в XML-файле
-* \param [in] findid - id сотрудника
-*/
+//Функция поиска начальников искомого сотрудника
 void SearchSuperiorsOfTheDesiredEmployee(XMLElement* node, int findid)
 {
     //Перебираем все элементы с именем Department
@@ -142,7 +133,7 @@ void SearchSuperiorsOfTheDesiredEmployee(XMLElement* node, int findid)
     }
 }
 
-//проверка данных из txt-файла
+//Функция проверки данных из txt-файла
 bool isdigit(string s)
 {
     for (int i = 0; i < s.length(); i++)
@@ -156,7 +147,7 @@ bool isdigit(string s)
 
 }
 
-/*Получение id из txt-файла*/
+//Функция получения id из txt-файла
 int GettingIdFromTxtFile(const char* file_txt)
 {
     string id_txt;
@@ -199,7 +190,7 @@ int GettingIdFromTxtFile(const char* file_txt)
 }
 
 
-/*Работа с xml файлом*/
+//Функция работы с xml файлом
 bool WorkingWithXMLFile(const char* file_xml)
 {
     XMLDocument doc;
