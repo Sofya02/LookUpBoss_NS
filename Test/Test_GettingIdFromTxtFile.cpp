@@ -41,6 +41,7 @@ namespace TestGettingIdFromTxtFile
             Assert::IsTrue("Data entered incorrectly. The input string contains a set of different characters");
         }
 
+        //Файл не найден
         TEST_METHOD(TxtFileNotFound)
         {
             const char* file_txt = "TxtFileNotFound.txt";
@@ -139,6 +140,8 @@ namespace TestGettingIdFromTxtFile
 
         }
 
+
+        /*Проверка функции bool WorkingWithXMLFile(const char* file_xml) - функция работы с xml-файлои*/
 
         //Имя файла не введено
         TEST_METHOD(FileNotEntered)
