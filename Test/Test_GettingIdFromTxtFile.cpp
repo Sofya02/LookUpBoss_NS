@@ -22,14 +22,16 @@ namespace TestGettingIdFromTxtFile
             const char* file_txt = "primer1IdReceived.txt";
             int id = 5;
             int exp_res = GettingIdFromTxtFile(file_txt);
-            Assert::AreEqual(5, 5);
+            Assert::AreEqual(id, exp_res);
         }
 
         //Файл пустой
         TEST_METHOD(FileIsEmpty)
         {
             const char* file_txt = "primer2FileIsEmpty.txt";
+            int id = 5;
             int exp_res = GettingIdFromTxtFile(file_txt);
+            Assert::AreNotEqual(id, exp_res);
             Assert::IsTrue("Invalid input file specified. The file may not exist");
         }
 
@@ -37,7 +39,9 @@ namespace TestGettingIdFromTxtFile
         TEST_METHOD(IncorrectDataInTheFile)
         {
             const char* file_txt = "primer3IncorrectDataInTheFile.txt";
-            //int exp_res = GettingIdFromTxtFile(file_txt);
+            int id = 5;
+            int exp_res = GettingIdFromTxtFile(file_txt);
+            Assert::AreNotEqual(id, exp_res);
             Assert::IsTrue("Data entered incorrectly. The input string contains a set of different characters");
         }
 
@@ -45,7 +49,9 @@ namespace TestGettingIdFromTxtFile
         TEST_METHOD(TxtFileNotFound)
         {
             const char* file_txt = "TxtFileNotFound.txt";
-           // int exp_res = GettingIdFromTxtFile(file_txt);
+            int id = 5;
+            int exp_res = GettingIdFromTxtFile(file_txt);
+            Assert::AreNotEqual(id, exp_res);
             Assert::IsTrue("Invalid input file specified. The file may not exist");
 
         }
