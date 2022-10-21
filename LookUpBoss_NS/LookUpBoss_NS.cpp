@@ -27,38 +27,23 @@ string MatchingIdAndName(int id_for_name)
     return "";
 }
 
-
-///Функция сохранения результатов в файл
-bool SavingResultsToAFile()
+//Сохранение результатов в файл
+void SavingResultsToAFile()
 {
-    ofstream fout; /// объект класса ofstream
+    ofstream fout; // объект класса ofstream
     fout.open("output.txt", std::ios::app);
     for (int i = headers.size() - 2; i >= 0; i--)
     {
-        /// Если сотрудник присутствует на рабочем месте, записываем его в выходной файл
+        //Если сотрудник присутствует на рабочем месте, записываем его в выходной файл
         if (habsent[i])
         {
-            /// Записываем сотрудника в выходной файл
+            //Записываем сотрудника в выходной файл
             fout << MatchingIdAndName(headers[i]) << endl;
-            return true;
         }
-        else { return false; }
     }
-    /// Закрытие файла
+    //Закрытие файла
     fout.close();
 
-}
-
-///Функция прооверки на существование файла
-int exists(const char* fname)
-{
-    FILE* file;
-    if ((file = fopen(fname, "r")))
-    {
-        fclose(file);
-        return 1;
-    }
-    return 0;
 }
 
 ///Функция поиска начальников искомого сотрудника
@@ -112,7 +97,7 @@ void SearchSuperiorsOfTheDesiredEmployee(XMLElement* node, int findid)
                 {
                     /// Вывод сообщения об ошибке
                     cout << "The person is absent" << endl;
-                    
+
                 }
                 /// Иначе
                 else
@@ -133,7 +118,8 @@ void SearchSuperiorsOfTheDesiredEmployee(XMLElement* node, int findid)
     }
 }
 
-///Функция проверки данных из txt-файла
+
+//проверка данных из txt-файла
 bool isdigit(string s)
 {
     for (int i = 0; i < s.length(); i++)
@@ -147,24 +133,24 @@ bool isdigit(string s)
 
 }
 
-///Функция получения id из txt-файла
+/*Получение id из txt-файла*/
 int GettingIdFromTxtFile(const char* file_txt)
 {
     string id_txt;
-    /// Получение значения id из txt - файла
+    //Получение значения id из txt - файла
     fstream file;
-    /// открываем файл в режиме чтения
+    //открываем файл в режиме чтения
     file.open(file_txt);
-    /// если открытие файла прошло корректно, то
+    //если открытие файла прошло корректно, то
     try
     {
         if (file)
         {
-            /// цикл для чтения значений из файла; выполнение цикла прервется,
-               /// когда достигнем конца файла, в этом случае F.eof() вернет истину.
+            //цикл для чтения значений из файла; выполнение цикла прервется,
+               // когда достигнем конца файла, в этом случае F.eof() вернет истину.
             while (!file.eof())
             {
-                /// чтение очередного значения из потока F в переменную a
+                //чтение очередного значения из потока F в переменную a
                 file >> id_txt;
                 if (isdigit(id_txt))
                 {
@@ -173,7 +159,7 @@ int GettingIdFromTxtFile(const char* file_txt)
                 else
                     throw 2;
             }
-            /// закрытие файла
+            //закрытие файла
             file.close();
         }
         else
@@ -199,31 +185,39 @@ bool WorkingWithXMLFile(const char* file_xml)
         cout << "Invalid input file specified. The file may not exist" << endl;
         return false;
     }
-    else{
-    const char* txt_file = "id.txt";
-    int id_from_txt = GettingIdFromTxtFile(txt_file);
-    XMLElement* node = doc.FirstChildElement()->FirstChildElement("Department");
-    SearchSuperiorsOfTheDesiredEmployee(node, id_from_txt);
-    return true;}
+    else {
+        const char* txt_file = "id.txt";
+        int id_from_txt = GettingIdFromTxtFile(txt_file);
+        XMLElement* node = doc.FirstChildElement()->FirstChildElement("Department");
+        SearchSuperiorsOfTheDesiredEmployee(node, id_from_txt);
+        return true;
+    }
 }
 
 
+///Функция прооверки на существование файла
+int exists(const char* fname)
+{
+    FILE* file;
+    if ((file = fopen(fname, "r")))
+    {
+        fclose(file);
+        return 1;
+    }
+    return 0;
+}
 
 int main(int argc, char* argv[])
 {
     setlocale(LC_ALL, "Rus");
-   
 
     const char* xml_file = "hierarchy_tree.xml";
 
     WorkingWithXMLFile(xml_file);
 
+
     return 0;
 }
-
-
-
-
 
 
 
