@@ -20,8 +20,8 @@ namespace TestGettingIdFromTxtFile
         TEST_METHOD(IdReceived)
         {
             const char* file_txt = "primer1IdReceived.txt";
-            int id = 5;
-            int exp_res = GettingIdFromTxtFile(file_txt);
+            int id = 15;
+            int exp_res = GettingIdFromTxtFile("C:\\Users\\Sofya\\Desktop\\LookUpBoss_NS\\LookUpBoss_NS\\primer1IdReceived.txt");
             Assert::AreEqual(id, exp_res);
         }
 
