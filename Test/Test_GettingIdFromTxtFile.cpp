@@ -81,7 +81,7 @@ namespace TestGettingIdFromTxtFile
             int id = 5;
             string res = "";
             string exp_Name = MatchingIdAndName(id);
-            Assert::AreEqual(res, exp_Name);
+            Assert::AreNotEqual(res, exp_Name);
         }
         
 
