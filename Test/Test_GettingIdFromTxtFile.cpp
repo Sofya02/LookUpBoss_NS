@@ -12,50 +12,6 @@ namespace TestGettingIdFromTxtFile
 	TEST_CLASS(TestGettingIdFromTxtFile)
 	{
 	public:
-		
-
-        /*Проверка функции  int GettingIdFromTxtFile(const char* file_txt) - Получение id из txt-файла */
-
-        //Id получено
-        TEST_METHOD(IdReceived)
-        {
-            const char* file_txt = "primer1IdReceived.txt";
-            int id = 15;
-            int exp_res = GettingIdFromTxtFile("C:\\Users\\Sofya\\Desktop\\LookUpBoss_NS\\LookUpBoss_NS\\primer1IdReceived.txt");
-            Assert::AreEqual(id, exp_res);
-        }
-
-        //Файл пустой
-        TEST_METHOD(FileIsEmpty)
-        {
-            const char* file_txt = "primer2FileIsEmpty.txt";
-            int id = 5;
-            int exp_res = GettingIdFromTxtFile(file_txt);
-            Assert::AreNotEqual(id, exp_res);
-            Assert::IsTrue("Invalid input file specified. The file may not exist");
-        }
-
-        //В файле некорректные данные
-        TEST_METHOD(IncorrectDataInTheFile)
-        {
-            const char* file_txt = "primer3IncorrectDataInTheFile.txt";
-            int id = 5;
-            int exp_res = GettingIdFromTxtFile(file_txt);
-            Assert::AreNotEqual(id, exp_res);
-            Assert::IsTrue("Data entered incorrectly. The input string contains a set of different characters");
-        }
-
-        //Файл не найден
-        TEST_METHOD(TxtFileNotFound)
-        {
-            const char* file_txt = "TxtFileNotFound.txt";
-            int id = 5;
-            int exp_res = GettingIdFromTxtFile(file_txt);
-            Assert::AreNotEqual(id, exp_res);
-            Assert::IsTrue("Invalid input file specified. The file may not exist");
-
-        }
-
 
         /*Проверка функции bool isdigit(string s) - проверка данных из txt-файла*/
         
@@ -132,7 +88,7 @@ namespace TestGettingIdFromTxtFile
         /*Проверка функции void SearchSuperiorsOfTheDesiredEmployee(XMLElement* node, int findid) - Функция поиска начальников искомого сотрудника*/
      
         /*Проверка результата выполнения основной функции(результат:наличие файла)*/
-        TEST_METHOD(OneDepartment)
+        TEST_METHOD(FilePresence)
         {
             XMLDocument doc;
             doc.LoadFile("C:\\Users\\Sofya\\Desktop\\LookUpBoss_NS\\LookUpBoss_NS\\hierarchy_tree.xml");
