@@ -102,6 +102,20 @@ namespace TestGettingIdFromTxtFile
 
         }
 
+        TEST_METHOD(FileNotPresence)
+        {
+            XMLDocument doc;
+            doc.LoadFile("C:\\Users\\Sofya\\Desktop\\LookUpBoss_NS\\LookUpBoss_NS\\hierarchy_tree.xml");
+            const char* txt_file = "C:\\Users\\Sofya\\Desktop\\LookUpBoss_NS\\LookUpBoss_NS\\id.txt";
+            int id_from_txt = GettingIdFromTxtFile(txt_file);
+            XMLElement* node = doc.FirstChildElement()->FirstChildElement("Department");
+            SearchSuperiorsOfTheDesiredEmployee(node, id_from_txt);
+            bool res = exists("C:\\Users\\Sofya\\Desktop\\LookUpBoss_NS\\LookUpBoss_NS\\out.txt");
+            bool exp = false;
+            Assert::AreEqual(res, exp);
+
+        }
+
 
         /*Проверка функции bool WorkingWithXMLFile(const char* file_xml) - функция работы с xml-файлои*/
 
